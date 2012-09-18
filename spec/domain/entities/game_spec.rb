@@ -1,4 +1,5 @@
-require 'spec_helper'
+
+require './spec/domain/spec_helper'
 require './domain/entities/game'
 
 # class Player

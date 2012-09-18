@@ -10,8 +10,6 @@ require 'bundler/setup'
 # Bundler Setup.
 Bundler.require(:default)
 
-require './implementation/api/v1/api_implementation.rb'
-
 # Load all domain files.
 Dir["./domain/**/*.rb"].each do |file|
  require file
