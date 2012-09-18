@@ -3,8 +3,6 @@ gem 'sinatra'
 gem 'roar'
 gem 'haml'
 gem 'mustache'
-#gem 'dm-postgres-adapter'
-#gem 'data_mapper'
 
 group :development do
  gem 'thin'
