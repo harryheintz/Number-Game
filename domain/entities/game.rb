@@ -3,7 +3,7 @@ module Domain
     attr_writer :start
   
     def initialize
-      @number = rand(1..101) # Change this to 1..3 for sane manual testing purposes
+      randomize 
       @guess_count = 1 # Because you can't win with 0 guesses, so there will always be at least one
       @guess_limit = 10
     end
@@ -14,6 +14,10 @@ module Domain
       puts "Well hello there, #{@name}  Would you like to play a number game with me? \n1 = Yes, please! \n2 = Nah, I gotta clean my toothbrush"
       decision
     end
+    
+    def randomize
+      @number = rand(1..101)
+    end  
   
     def decision
       @query = gets.to_i
@@ -102,7 +106,7 @@ module Domain
       if @answer == 1
         puts "Ok... here we go! \n\n"
         @guess_count = 1
-        @number = rand(1..100)
+        randomize
         start
       else
         quit 

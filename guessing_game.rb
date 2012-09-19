@@ -1,4 +1,4 @@
-require './domain/entites/game'
+require './domain/entities/game'
 
 @game = Game.new # We create a game instance
 @game.intro # We start the game.
