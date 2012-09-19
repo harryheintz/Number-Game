@@ -1,9 +1,9 @@
 module Implementation
-  class Web
+  class Web < Sinatra::Base
     module Views
       class Layout < Mustache
         def title
-          @title || "Number Game."
+          @title || "Number Game Test."
         end
       end
       class Home < Layout

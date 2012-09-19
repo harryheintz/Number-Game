@@ -1,7 +1,7 @@
 module Implementation
   class Web < Sinatra::Base
     register Mustache::Sinatra
-    require './implementation/web/views/web_layout'
+    require './implementation/web/views/web_view'
 
     set :mustache, {
       :views => 'implementation/web/views/',
