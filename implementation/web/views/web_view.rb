@@ -21,6 +21,11 @@ module Implementation
           "Bob Franks"
         end
       end
+      class Graphics < Layout
+        def graphics
+          "Insert your graphics code here."
+        end
+      end
     end
   end
 end

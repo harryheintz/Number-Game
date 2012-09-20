@@ -21,5 +21,9 @@ module Implementation
     get "/account/?" do
       mustache :account
     end
+    
+    get "/graphics/?" do
+      mustache :graphics
+    end
   end
 end
