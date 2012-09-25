@@ -1,4 +1,4 @@
-module Domain
+#module Domain
   class Game
     attr_writer :start
   
@@ -38,12 +38,13 @@ module Domain
       puts "I'm thinking of a random number from 1 to 100. \nCan you guess it? \nEnter a number and hit return."
       receive(gets)
     end
+    
   
     def receive(guess)
       @guess = force_to_number(guess)
       process_answer
     end
-  
+    
     def process_answer
       if correct?
         respond_for_correct
@@ -125,4 +126,4 @@ module Domain
     end
 
   end
-end
+#end

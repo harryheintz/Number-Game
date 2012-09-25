@@ -25,5 +25,10 @@ module Implementation
     get "/graphics/?" do
       mustache :graphics
     end
+    
+    get "/andyho/?" do
+      mustache :andyho
+    end
+    
   end
 end
