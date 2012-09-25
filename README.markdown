@@ -57,8 +57,56 @@ Focusing acceptance testing on the API also forces you to write cucumber feature
 
 ### The Test-Driven Process
 
-While there are no hard and fast rules with regard to the testing process, generally, this is order I suggest:
+The basic premise of test-first design is:
 
-1. Write a simple cucumber feature for an API endpoint with scenarios for the various expectations you have for that endpoint's behavior. Include the specific format of JSON data both incoming and outgoing from the API (see included examples in the '/features' directory). For now, this process is acting as your specification for the endpoint and, just as important, the process forces you to think about how an external application, including your user interface(s) will expect to deal with the API. We aren't going to bother running this test or working on the step definitions needed to make this feature run just yet. That will come later.
+1. Write test
+2. Run the tests, which fail
+3. Write the code which makes the tests pass
 
-2. More to come...
+While there are no hard and fast rules with regard to the testing process, I've been working for a while on what seems for me to the be most productive process. At the start of development, the goal of test driven development is to point you clearly in the direction you need to be going, and enable you to write clear and concise code which satisfies the needs of the app. What you gain in the end from test-driven development is the confidence of your test coverage which allows you to make sweeping changes to your application without fear of breaking everything.
+
+The problem I've had with testing over the years is that progress is often stymied by: having too many unrelated concerns being covered in the same place; reliance on tests which bootstrap frameworks, and therefore run slow; and forced assumptions in order to get a test passing. To counteract these tendencies, we therefore respectively: unit test different layers of our application independently by stubbing interaction with interacting layers which are outside the concerns of the test; write our tests in "plain ruby" with as little interaction with libraries and frameworks as possible; and we kick the can down the road when we feel assumptions for one layer are being forced by another. You'll see a lot of that "kick the can" mentality described below.
+
+Generally, I suggest beginning with the API server and branching out from there in either directions (inward to Domain and Persistence, outward to View):
+
+#### STEP ONE - API Server Acceptance Test Drafting
+
+Write a simple cucumber feature for an API server endpoint with scenarios outlining the various expectations you have for that endpoint's behavior. Include the specific format of JSON data both incoming and outgoing from the API _(see included examples in the '/features' directory)_. 
+
+For now, this process is acting as your initial specification for the endpoint and, just as important, the process forces you to think about how an external application, including your user interface(s) will expect to deal with the API. It makes you ask important questions up front about how the resources in your system will be named and expected to behave from the central point of the data, the API server, which all implementations will use.
+
+We aren't going to bother running this test or working on the step definitions needed to make this feature run just yet. Since acceptance testing tests the full stack of your application, it runs very slow. Also, there will be a lot of code which needs to be written to make even the most basic acceptance test pass. So, once we solidify the concepts here, we move on. We will come back to this testing layer later. __Kick the _passing acceptance test_ can__. 
+
+
+#### STEP TWO - Domain Unit Testing
+
+Next, we jump into Rspec and start writing unit tests for the entities and services of our Domain as outlined in the acceptance test _(I like to keep these in spec/domain/entities and spec/domain/services)_. These should begin as lean as possible, dealing at first with only the aspects of the object which will be exposed to the API server. Write tests for each public attribute which should be surfaced on the API. Write any critical validation needed for data received by the API server (posts, puts, patches). And if you think of any critical business criteria which will needs to happen in the Domain, you can write those tests as well. An example of this would be writing a test for a calculation on the object's data which will be exposed to the API server as an attribute (ie. calculating a percentage of a "revenue" attribute to create a "commission" attribute).
+
+Write these tests, run them, they will fail, write as little code as possible to make them pass. Done. Move on.
+
+Note: What you want to avoid writing in the Domain layer are any considerations over the database (Persistence) used. That will take place, as you might have guessed, in the _Persistence Testing_. At first, you may not even want to decide what database and ORM you use for the application. We don't know enough about our needs yet. We can write a lot of behavior without needing to store data yet. __Kick the _persistence_ can__.
+
+#### STEP THREE - API Server Routes Unit Testing
+
+Our API server controllers, usually Sinatra::Base applications, are intentionally lean. They really only do two basic things: 
+
+1. Retrieve data from the Domain to hand off to the front end.
+2. Deal with routing exceptions
+
+Therefore, testing here will also be fairly lean. Test that the route responds to the uri you expect, test that it can access the data it needs, and test that when it runs into a problem it responds in a useful way for the end user (deal with exceptions).
+
+Write these tests, run them, they will fail, write as little code as possible to make them pass. Done. Move on.
+
+#### STEP FOUR - API Server Representers and Our First Working Acceptance Test
+
+You could very easily use Ruby's to_json method as provided to spit out perfectly fine json right from your Sinatra:Base app. But let's stop and think about what that. It means you expect to expose every public attribute of your Domain object to the server API. That may be true, but it likely won't always be the case. Different front-end user interfaces will likely have different uses and intentions. An administrator interface may very well expect to utilize all the objects data, but that probably will not be true of a public web interface.
+
+Often, in MVC systems, this problem gets solved in the Model. But the outside world is not a concern of the model, so we don't want to muddy our Domain with those concerns. There have been several small API server framework or library solutions for solving this (RABL, Grape, etc.), but the one we find most elegant and unassuming of your application design is the ROAR, a framework-agnostic REST framework.
+
+With ROAR, we create Representers, which we can extend our Domain objects with on the fly to apply expectations to the attributes shared and structure of our json data. So, for example, you can create a PostAdminRepresenter and a PostPublicRepresenter to provide separate GET data and accepted POST data for the same Post object. It also has some nice features like HAL resource links (which we'll cover later) and the ability to parse not only outgoing data to json, but incoming json data back into Ruby at the same time.
+
+So, next, we write a representer for our API server endpoint which satisfies the json expectations outlined in our acceptance test back in step one. Now, we run our acceptance test and see where it breaks. If you've caught everything in each stage so far, it likely will only be failing on the issue of persistence... we have no data.
+
+#### STEP FIVE - Persistence Implementation and Testing
+
+Now...
