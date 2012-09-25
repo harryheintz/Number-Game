@@ -1,4 +1,4 @@
-#module Domain
+module Domain
   class Game
     attr_writer :start
   
@@ -126,4 +126,4 @@
     end
 
   end
-#end
+end
