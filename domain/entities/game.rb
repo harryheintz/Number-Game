@@ -42,7 +42,12 @@ module Domain
   
     def receive(guess)
       @guess = force_to_number(guess)
+      if @guess > 100
+        puts "\n \n \n \n Are you retarded? Let's try this again... \n \n \n \n"
+        start
+      else
       process_answer
+    end
     end
     
     def process_answer
