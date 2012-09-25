@@ -15,4 +15,5 @@ group :test do
  gem 'factory_girl'
  gem 'capybara'
  gem 'cucumber'
+ gem 'autotest'
 end

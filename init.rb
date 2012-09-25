@@ -16,6 +16,6 @@ Dir["./domain/**/*.rb"].each do |file|
 end
 
 # Load all implementation files.
-Dir["./implementation/api/**/*.rb"].each do |file|
+Dir["./implementation/**/*.rb"].each do |file|
  require file
 end

@@ -1,14 +1,14 @@
 module Implementation
   class Web < Sinatra::Base
     register Mustache::Sinatra
-    require './implementation/web/views/web_layout'
+    require './implementation/web/views/web_view'
 
     set :mustache, {
       :views => 'implementation/web/views/',
       :templates => 'implementation/web/templates/'
     }
     
-    set :public, "implementation/web/public/"
+    set :public_folder, "implementation/web/public/"
     
     get "/" do
       mustache :home
@@ -21,5 +21,14 @@ module Implementation
     get "/account/?" do
       mustache :account
     end
+    
+    get "/graphics/?" do
+      mustache :graphics
+    end
+    
+    get "/andyho/?" do
+      mustache :andyho
+    end
+    
   end
 end

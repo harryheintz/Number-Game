@@ -1,5 +1,5 @@
 module Implementation
-  class Web
+  class Web < Sinatra::Base
     helpers do
       # All helpers defined here will be available across all the application.
       #
