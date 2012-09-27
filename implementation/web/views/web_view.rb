@@ -3,7 +3,7 @@ module Implementation
     module Views
       class Layout < Mustache
         def title
-          @title || "Anything."
+          @title || "Eventually, I will be a number game."
         end
       end
       class Home < Layout
@@ -28,7 +28,7 @@ module Implementation
       end
       class Andyho < Layout
         def anything
-          "This is Andy's Page."
+          "Basic Java Scripting test w/API"
         end
       end
     end
