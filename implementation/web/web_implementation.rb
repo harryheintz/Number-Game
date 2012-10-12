@@ -26,8 +26,8 @@ module Implementation
       mustache :graphics
     end
     
-    get "/andyho/?" do
-      mustache :andyho
+    get "/anything/?" do
+      mustache :anything
     end
     
   end
