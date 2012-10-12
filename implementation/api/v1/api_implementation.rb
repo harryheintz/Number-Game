@@ -14,7 +14,7 @@ module Implementation
       end
       
       get '/start' do
-        # @game =  Domain::Game.new
+        @game = Domain::Game.new
         response = {:message => "This will initiate a game"}
         response.to_json
       end
