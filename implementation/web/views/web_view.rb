@@ -26,7 +26,7 @@ module Implementation
           "Any string"
         end
       end
-      class Andyho < Layout
+      class Anything < Layout
         def anything
           "Basic Java Scripting test w/API"
         end

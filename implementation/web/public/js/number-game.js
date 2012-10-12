@@ -1,6 +1,8 @@
-numberGame = {
-	# add functions here
-	# your api calls will be to 'api/v1/guess'
-	# first fucntion should set a variable, get the api data (getJSON), manipulate the array
-	
-}
+var numberGame = (function() {
+	$(document).ready(function() {
+		$("#startbutton").click(function(){
+		$.getJSON('api/v1/start'); // this will initialize the game
+	});
+});
+})
+(numberGame); //end javascript
