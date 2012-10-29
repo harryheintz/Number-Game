@@ -1,33 +1,22 @@
 module Domain
   class Game
-    attr_reader :id, :message
+    #attr_reader :id, :message
+    attr_writer :start
   
     def initialize
       randomize 
       @game = Persistence::GameData.create(:number => @number)
-      @game.message = "I'm thinking of a random number from 1 to 100. \nCan you guess it? \nEnter a number and hit return."
-      @game.user_data_id = 1
-      @game.save
+      
+      # @guess_count = 1 # Because you can't win with 0 guesses, so there will always be at least one
+      # ^ now in the database
+      @guess_limit = 10
     end
-    
-    def self.find(id)
-      @game = Persistence::GameData.first(:id => id)
-    end
-    
-    def self.find_by_user(user_data_id)
-      @game = Persistence::GameData.all(:user_data_id => user_data_id)
-    end
-    
-    #PUT IN HTML
-    # def intro
-    #   puts "Hello there! \nI'm glad you stopped by. \nIf I may ask, what is your name?"
-    #   @name = gets.capitalize 
-    #   puts "Well hello there, #{@name}  Would you like to play a number game with me? \n1 = Yes, please! \n2 = Nah, I gotta clean my toothbrush"
-    #   decision
-    # end
-    
-    def guess_limit
-      10
+
+    def intro
+      puts "Hello there! \nI'm glad you stopped by. \nIf I may ask, what is your name?"
+      @name = gets.capitalize 
+      puts "Well hello there, #{@name}  Would you like to play a number game with me? \n1 = Yes, please! \n2 = Nah, I gotta clean my toothbrush"
+      decision
     end
     
     def randomize
@@ -47,6 +36,11 @@ module Domain
     def quit
       puts "Ok then, chicken shit... PEACE!!"
       exit
+    end
+      
+    def start
+      message = "I'm thinking of a random number from 1 to 100. \nCan you guess it? \nEnter a number and hit return."
+      receive(gets)
     end
     
   
@@ -70,7 +64,7 @@ module Domain
     end
   
     def respond_for_correct
-      if guess_count == 1
+      if @guess_count == 1
         puts "Holy Shit! One guess!! Are you cheating?"
         play_again
       else
@@ -81,7 +75,7 @@ module Domain
     end
     
     def respond_for_incorrect
-      if guess_count == guess_limit
+      if @guess_count == @guess_limit
         puts "You lose, Fucker!!"
         play_again
       else

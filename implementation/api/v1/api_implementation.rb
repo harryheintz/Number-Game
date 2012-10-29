@@ -15,14 +15,12 @@ module Implementation
       
       get '/start' do
         @game = Domain::Game.new
-        response = {:message => "This will initiate a game"}
+        response = {:message => "This will initiate a game", :id => 1}
         response.to_json
       end
       
-      get '/guess' do
-        response = [{:message => "This is message 1", :status => "good"},
-                    {:message => "This is message 2", :status => "bad"},
-                    {:message => "This is message 3", :status => "average"}]
+      post '/guess' do
+        @game = Domain::Game.find(:id) # 1 is for the current user that is hardcoded
         response.to_json
       end
       
