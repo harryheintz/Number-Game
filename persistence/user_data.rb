@@ -4,7 +4,7 @@ module Persistence
     has n, :game_data
     has n, :high_scores
     
-    property :username, String, :require => true
+    property :username, String
     property :first_name, String
     property :last_name, String
     

@@ -27,6 +27,7 @@ module Implementation
     end
     
     get "/anything/?" do
+      @test = Persistence::GameData.get(1)
       mustache :anything
     end
     
