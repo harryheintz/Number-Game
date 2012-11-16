@@ -25,4 +25,4 @@ Dir["./persistence/**/*.rb"].each do |file|
  require file
 end
 
-DataMapper.setup(:default, 'postgres://user:password@hostname/database') #your postges database credentials
+DataMapper.setup(:default, 'postgres://user:harryheintz@localhost/number_game') #your postges database credentials

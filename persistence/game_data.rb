@@ -8,3 +8,5 @@ module Persistence ## Persistence::GameData
     belongs_to, :user_data
   end
 end
+
+# Persistence::GameData.id
