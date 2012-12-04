@@ -8,7 +8,7 @@ module Persistence ## Persistence::GameData
     property :created_at,  DateTime
     
     belongs_to :user_data
-    
+      
   end
 end
 

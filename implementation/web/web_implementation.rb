@@ -15,22 +15,16 @@ module Implementation
     end
     
     get "/about/?" do
-      mustache :about
-      @pickle = 6
-      binding.pry
+      mustache :about    
     end
     
     get "/account/?" do
       mustache :account
     end
     
-    get "/graphics/?" do
-      mustache :graphics
-    end
-    
-    get "/anything/?" do
+    get "/game/?" do
       @test = Persistence::GameData.get(1)
-      mustache :anything
+      mustache :game
     end
     
   end

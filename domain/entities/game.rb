@@ -5,7 +5,7 @@ module Domain
     def initialize
       randomize 
       @game = Persistence::GameData.create(:number => @number)
-      @game.message = "I'm thinking of a random number from 1 to 100. \nCan you guess it? \nEnter a number and hit return."
+      #@game.message = "I'm thinking of a random number from 1 to 100. \nCan you guess it? \nEnter a number and hit return."
       @game.user_data_id = 1
       @game.save
     end

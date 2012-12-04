@@ -21,13 +21,8 @@ module Implementation
           "Bob Franks"
         end
       end
-      class Graphics < Layout
-        def graphics
-          "Any string"
-        end
-      end
-      class Anything < Layout
-        def anything
+      class Game < Layout
+        def game
           "Basic Java Scripting test w/API"
         end
       end
