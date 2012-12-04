@@ -10,6 +10,7 @@ gem 'dm-postgres-adapter'
 group :development do
  gem 'thin'
  gem 'shotgun'
+ gem 'pry'
 end
 
 group :test do

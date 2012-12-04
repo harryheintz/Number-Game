@@ -16,6 +16,8 @@ module Implementation
     
     get "/about/?" do
       mustache :about
+      @pickle = 6
+      binding.pry
     end
     
     get "/account/?" do

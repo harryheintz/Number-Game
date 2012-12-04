@@ -4,6 +4,7 @@ module Persistence
     has n, :game_data
     has n, :high_scores
     
+    property :id, Serial
     property :username, String
     property :first_name, String
     property :last_name, String
@@ -13,6 +14,7 @@ module Persistence
   class HighScore #this does not shine directly through to Domain, instead you get that data from UserData
     include DataMapper::Resource
     belongs_to :user_data
+    property :id, Serial
     property :score, Integer
     
   end

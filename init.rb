@@ -6,6 +6,7 @@ require 'roar/representer/json'
 require 'roar/representer/feature/hypermedia'
 require 'bundler/setup'
 require 'data_mapper'
+require 'pry' #look and see if we need to exclude this in production later
 
 # Bundler Setup.
 Bundler.require(:default)
@@ -25,4 +26,6 @@ Dir["./persistence/**/*.rb"].each do |file|
  require file
 end
 
-DataMapper.setup(:default, 'postgres://user:harryheintz@localhost/number_game') #your postges database credentials
+DataMapper.setup(:default, 'postgres://harryheintz:@localhost/number_game') #your postges database credentials
+DataMapper.finalize
+DataMapper.auto_upgrade!
