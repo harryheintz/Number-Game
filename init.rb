@@ -28,4 +28,4 @@ end
 
 DataMapper.setup(:default, 'postgres://harryheintz:@localhost/number_game') #your postges database credentials
 DataMapper.finalize
-DataMapper.auto_upgrade!
+#DataMapper.auto_upgrade!
