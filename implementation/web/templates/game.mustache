@@ -2,4 +2,12 @@
 
 <p>{{game}}</p>
 
- <input type="button" id= "startgame" value="Click here to play!" />
+ <p><input type="button" id= "startgame" value="Click here to play!" /></p>
+
+<body>
+	<form id = "submit" action="api/v1/guess">
+  		Enter Your Guess: <input type="text" name="guess"><br>
+  		<input type="submit" value="Submit">
+	</form>
+</body>
+

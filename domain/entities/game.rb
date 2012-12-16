@@ -34,20 +34,20 @@ module Domain
       @number = rand(1..101)
     end  
   
-    def decision
-      @query = gets.to_i
-      if @query == 1
-        puts "Great! Let's do it! \n\n\n\n\n\n"
-        start
-      else
-        quit
-      end
-    end
+   # def decision
+    #  @query = gets.to_i
+     # if @query == 1
+      #  puts "Great! Let's do it! \n\n\n\n\n\n"
+       # start
+      #else
+       # quit
+      #end
+    #end
   
-    def quit
-      puts "Ok then, chicken shit... PEACE!!"
-      exit
-    end
+    #def quit
+     # puts "Ok then, chicken shit... PEACE!!"
+      #exit
+    #end
     
   
     def receive(guess)

@@ -15,13 +15,11 @@ module Implementation
       
       get '/start' do
         @game = Domain::Game.new
-        response = {:message => "This will initiate a game", :id => 1}
-        response.to_json
       end
       
       post '/guess' do
-        @game = Domain::Game.find(:id) # 1 is for the current user that is hardcoded
-        response.to_json
+        #@game = Domain::Game.find(:id) # 1 is for the current user that is hardcoded
+        @guess = "guess"
       end
       
       get '/game/:id' do
