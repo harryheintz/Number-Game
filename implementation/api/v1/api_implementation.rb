@@ -18,8 +18,8 @@ module Implementation
       end
       
       post '/guess' do
-        #@game = Domain::Game.find(:id) # 1 is for the current user that is hardcoded
-        @guess = "guess"
+        @game = Domain::Game.find(:id) # 1 is for the current user that is hardcoded
+        
       end
       
       get '/game/:id' do

@@ -5,6 +5,8 @@ module Domain
     def initialize
       randomize 
       @game = Persistence::GameData.create(:number => @number)
+      @game.guess_count = 1
+      
       #@game.message = "I'm thinking of a random number from 1 to 100. \nCan you guess it? \nEnter a number and hit return."
       @game.user_data_id = 1
       @game.save
@@ -25,6 +27,7 @@ module Domain
     #   puts "Well hello there, #{@name}  Would you like to play a number game with me? \n1 = Yes, please! \n2 = Nah, I gotta clean my toothbrush"
     #   decision
     # end
+    
     
     def guess_limit
       10
@@ -52,12 +55,12 @@ module Domain
   
     def receive(guess)
       @guess = force_to_number(guess)
-      if @guess > 100
-        puts "\n \n \n \n Are you retarded? Let's try this again... \n \n \n \n"
-        start
-      else
+      #if @guess > 100
+       # puts "\n \n \n \n Are you retarded? Let's try this again... \n \n \n \n"
+        #start
+      #else
       process_answer
-    end
+    #end
     end
     
     def process_answer
