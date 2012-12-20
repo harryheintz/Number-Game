@@ -23,7 +23,7 @@ module Implementation
       end
       class Game < Layout
         def game
-          "Basic Java Scripting test w/API"
+          "It's time to get freaky with number guessing!"
         end
       end
     end

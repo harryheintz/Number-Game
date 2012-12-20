@@ -6,7 +6,6 @@ module Domain
       randomize 
       @game = Persistence::GameData.create(:number => @number)
       @game.guess_count = 1
-      
       #@game.message = "I'm thinking of a random number from 1 to 100. \nCan you guess it? \nEnter a number and hit return."
       @game.user_data_id = 1
       @game.save
@@ -20,15 +19,6 @@ module Domain
       @game = Persistence::GameData.all(:user_data_id => user_data_id)
     end
     
-    #PUT IN HTML
-    # def intro
-    #   puts "Hello there! \nI'm glad you stopped by. \nIf I may ask, what is your name?"
-    #   @name = gets.capitalize 
-    #   puts "Well hello there, #{@name}  Would you like to play a number game with me? \n1 = Yes, please! \n2 = Nah, I gotta clean my toothbrush"
-    #   decision
-    # end
-    
-    
     def guess_limit
       10
     end
@@ -36,23 +26,12 @@ module Domain
     def randomize
       @number = rand(1..101)
     end  
-  
-   # def decision
-    #  @query = gets.to_i
-     # if @query == 1
-      #  puts "Great! Let's do it! \n\n\n\n\n\n"
-       # start
-      #else
-       # quit
-      #end
-    #end
-  
-    #def quit
-     # puts "Ok then, chicken shit... PEACE!!"
-      #exit
-    #end
     
-  
+    def start
+      message = "I'm thinking of a random number from 1 to 100. \nCan you guess it? \nEnter a number and hit return."
+      receive(gets)
+    end
+    
     def receive(guess)
       @guess = force_to_number(guess)
       #if @guess > 100
@@ -113,23 +92,6 @@ module Domain
   
     def increase_guess_count
       @guess_count += 1
-    end
-  
-    def play_again
-      puts "Would you like to play again? (Enter 1 for yes, 2 for no)"
-      @answer = gets.to_i
-      reset_game
-    end
-  
-    def reset_game
-      if @answer == 1
-        puts "Ok... here we go! \n\n"
-        @guess_count = 1
-        randomize
-        start
-      else
-        quit 
-      end
     end
   
     def force_to_number(command_line_input)

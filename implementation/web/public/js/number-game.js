@@ -1,3 +1,4 @@
+
 var numberGame = (function () 
  {
 	$(document).ready(function ()
@@ -7,7 +8,9 @@ var numberGame = (function ()
 			{
 				$.getJSON('api/v1/start');
 				$("#startgame").hide();
+				
 				$("#submit").show("slow");
+				
 	    	});
 	}); 
 })
