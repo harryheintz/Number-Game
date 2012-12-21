@@ -3,7 +3,7 @@ module Persistence ## Persistence::GameData
     include DataMapper::Resource
     
     property :id,          Serial
-    property :guess_count, Integer
+    property :guess_count, Integer, :default => 1
     property :number,      Integer
     property :created_at,  DateTime
     

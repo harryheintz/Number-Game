@@ -16,16 +16,18 @@ module Implementation
         "You need to request a specific endpoint."
       end
       
-      get '/start' do
+      get '/start' do #this should ultimately become a post where you send user name, or id, or whatever to get at User
         @game = Domain::Game.new
-        welcome = {:message => "Hello there! I'm glad you stopped by. Let's Play a number game!"}
+        #@game.to_json
+        welcome = {:message => @game.message}
         welcome.to_json
       end
       
-      post '/guess' do
-        @game.recieve
-        @guess = "guess"
-        #@game = Domain::Game.find(:id) # 1 is for the current user that is hardcoded
+      put '/play' do
+        test_response = {:id => 106, :message => "Welcome to the Number Game. I work!!"}
+        test_response.to_json
+        # @game = Domain::Game.guess(params[:id], params[:guess]).extend(GameRepresenter)
+        # @game.to_json
       end
       
       get '/game/:id' do

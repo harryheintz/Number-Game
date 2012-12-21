@@ -7,8 +7,9 @@ module Implementation
       include Roar::Representer::JSON
       include Roar::Representer::Feature::Hypermedia
 
+      property :id
       property :message
-      property :status
+      property :guess
       
       link :self do
         "/api/v1/game/#{self.id}"
