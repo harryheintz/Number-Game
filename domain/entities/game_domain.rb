@@ -9,8 +9,9 @@ class Game
   end
   
   def self.guess(id, guess)
-    game = get(id)
-    game.last_guess = guess
+    game = get(id.to_i)
+    game.last_guess = guess.to_i
+    game.save
     game.process_answer
     game.save
     game
@@ -67,15 +68,15 @@ class Game
   end
 
   def correct?
-    self.guess == number
+    self.last_guess == self.number
   end
 
   def too_high?
-    self.guess > number
+    self.last_guess > self.number
   end
 
   def too_low?
-    self.guess < number
+    self.last_guess < self.number
   end
 
   def increase_guess_count
