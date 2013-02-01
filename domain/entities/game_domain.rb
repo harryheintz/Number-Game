@@ -3,6 +3,7 @@ class Game
   def self.start(user_id = 1)
     game = create(:user_id => user_id)
     game.message = "I'm thinking of a random number from 1 to 100. Can you guess it? Enter a number and hit return."
+    game.last_guess
     game.randomize
     game.save
     game
@@ -11,6 +12,7 @@ class Game
   def self.guess(id, guess)
     game = get(id)
     game.last_guess = guess
+    game.save
     game.process_answer
     game.save
     game
@@ -40,7 +42,7 @@ class Game
     if guess_count == 1
       self.message = "Holy Shit! One guess!! Are you cheating?"
     else
-      self.message = "You got it! It's about time! It took you #{@guess_count} guesses."
+      self.message = "You got it! It's about time! It took you #{self.guess_count} guesses."
     end
   end
   
@@ -67,15 +69,15 @@ class Game
   end
 
   def correct?
-    self.guess == number
+    self.last_guess == self.number
   end
 
   def too_high?
-    self.guess > number
+    self.last_guess > self.number
   end
 
   def too_low?
-    self.guess < number
+    self.last_guess < self.number
   end
 
   def increase_guess_count

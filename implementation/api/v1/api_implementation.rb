@@ -9,7 +9,7 @@ module Implementation
       
       get '/start' do
         @game = Game.start.extend(GameRepresenter)
-        @game.to_json
+        game.to_json
       end
       
       post '/play' do
