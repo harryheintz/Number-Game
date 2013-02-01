@@ -12,6 +12,8 @@ class Game
   def self.guess(id, guess)
     game = get(id)
     game.last_guess = guess
+    game = get(id.to_i)
+    game.last_guess = guess.to_i
     game.save
     game.process_answer
     game.save
