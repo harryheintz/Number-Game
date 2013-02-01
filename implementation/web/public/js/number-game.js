@@ -1,20 +1,23 @@
 var numberGame = (function () 
- var responseData // Increased variable scope for the guess
  {
-	$(document).ready(function ()
-	{
-		$("#submit").hide();
-		$("#startgame").click(function()
-			{
-				$.getJSON('api/v1/start',responseData ###);
-				$("#startgame").hide(); //hide button HTML
+	$(document).ready(function (){
+		$("#game").hide();
+		$("#startgame").click(function(){
+				$.getJSON('api/v1/start', function(start_response){
+						$('#messages').html(start_response);
+						$("#startgame").hide(); //hide button HTML
+						$("#game").show("slow"); //submit form HTML
+				});
 				
-				$("#submit").show("slow"); //submit form HTML
-				//playerGuess = prompt("Enter your guess");
-				//console.log(playerGuess); //testing the variable
+				$("#guess_submission").click(function(){
+					$.getJSON('api/v1/play', function(guess_response){
+						$('#messages').html(guess_response.message);
+					})
+				})
+				
 		});
 	}); 
-})
+ })
 
-	//$.getJSON('api/v1/play')
+	
 (numberGame); //end javascript

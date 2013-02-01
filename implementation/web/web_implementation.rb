@@ -23,7 +23,7 @@ module Implementation
     end
     
     get "/game/?" do
-      @test = Persistence::GameData.get(1)
+      #@test = Persistence::GameData.get(1)
       mustache :game
     end
     

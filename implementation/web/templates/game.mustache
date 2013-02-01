@@ -1,13 +1,27 @@
 <h1>{{title}}</h1>
 
-<p>{{game}}</p>
+<body id="gameplay">
+	<p>{{game}}<p>
+	
+	<div id="messages">
+		</div>
 
- <p><input type="button" id= "startgame" value="Click here to play!" /></p>
+	<div id="start_button">
+		<p><input type="button" id= "startgame" value="Click here to play!" /></p>
+		</div>
 
-<body>
-	<form id = "game" action="api/v1/play">
-  		Enter Your Guess: <input type="text" name="guess"><br>
-  		<input type="submit" value="Submit">
-	</form>
+	<div id="guess_field">
+		<form id = "game" action="api/v1/play" method = "post">
+			Enter Your Guess: <input type="text" name="guess"><br>
+			<input type="submit" name = "guess_submission" value="Submit">
+			</form>
+		</div>
+
 </body>
+	
+
+
+
+	
+
 

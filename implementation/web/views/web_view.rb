@@ -23,8 +23,9 @@ module Implementation
       end
       class Game < Layout
         def game
-          "It's time to get freaky with number guessing!"
+         "Let's get freaky with some number guessing"
         end
+           
       end
     end
   end
